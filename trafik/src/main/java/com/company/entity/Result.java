@@ -10,14 +10,24 @@ public class Result {
 
     @JsonProperty("LineNumber")
     public String lineNumber;
-    @JsonProperty("LineDesignation")
-    public String lineDesignation;
+
+    @JsonProperty("JourneyPatternPointNumber")
+    public String pointNumber;
+
+    @JsonProperty("StopPointNumber")
+    public String stopPointNumber;
+
+    @JsonProperty("StopPointName")
+    public String stopPointName;
+
 
     @Override
     public String toString() {
         return "Result {" +
                 "LineNumber='" + lineNumber + '\'' +
-                ", LineDesignation " + lineDesignation +
+                ", JourneyPatternPointNumber " + pointNumber +
+                ", StopPointNumber " + stopPointNumber +
+                ", StopPointName " + stopPointName +
                 '}';
     }
 }

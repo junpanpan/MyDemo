@@ -10,17 +10,9 @@ public class Response {
 
     @JsonProperty("StatusCode")
     public String statusCode;
+
     @JsonProperty("ResponseData")
     public ResponseData responseData;
-
-
-//    public ResponseData getResponseData() {
-//        return responseData;
-//    }
-//
-//    public void setResponseData(ResponseData responseData) {
-//        this.responseData = responseData;
-//    }
 
     @Override
     public String toString() {

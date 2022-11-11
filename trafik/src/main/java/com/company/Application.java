@@ -1,48 +1,41 @@
 package com.company;
 
-import com.company.client.Client;
-import com.company.entity.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.context.annotation.Bean;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-public class Application {
+public class Application extends SpringBootServletInitializer {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Application.class);
+
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+        return builder.sources(Application.class);
+    }
 
     public static void main(String[] args) {
 
         LOGGER.info("Starting application.");
         SpringApplication.run(Application.class, args);
+    }
 
 //
-//        String[] beanNames = ctx.getBeanDefinitionNames();
-//        Arrays.sort(beanNames);
-//        for (String beanName : beanNames) {
-//            System.out.println(beanName);
-//        }
-    }
+//    @Bean
+//    public RestTemplate restTemplate(RestTemplateBuilder builder) {
+//        return builder.build();
+//    }
 
-    @Bean
-    public RestTemplate restTemplate(RestTemplateBuilder builder) {
-        return builder.build();
-    }
-
-    @Bean
-    public CommandLineRunner run(RestTemplate restTemplate) {
-        LOGGER.info("uri " + Client.ENDPOINT_URI);
-
-        return args -> {
-            Response response = restTemplate.getForObject(Client.ENDPOINT_URI, Response.class);
-            LOGGER.info(response.toString());
-        };
-    }
-
-
+//    @Bean
+//    public CommandLineRunner run(RestTemplate restTemplate) {
+//        LOGGER.info("uri " + Client.ENDPOINT_BUS_JOUR_URI);
+//
+//        return args -> {
+//                Response response = restTemplate.getForObject(Client.ENDPOINT_BUS_JOUR_URI, Response.class);
+//                LOGGER.info(response.toString());
+//        };
+//    }
 }
