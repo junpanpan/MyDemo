@@ -11,9 +11,11 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
+@Service
 public class Client {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Client.class);
@@ -23,7 +25,7 @@ public class Client {
     public final static String ENDPOINT_URI = "http://api.sl.se/api2/LineData.json?key=" + API_KEY + "&model=Line";
 
     public final static String ENDPOINT_BUS_JOUR_URI = "http://api.sl.se/api2/LineData.json?key=" + API_KEY
-                                                    + "&DefaultTransportModeCode=BUS&DirectionCode=1&model=Jour";
+                                                    + "&DefaultTransportModeCode=BUS&model=Jour";
 
     public final static String ENDPOINT_STOPAREA_URI = "http://api.sl.se/api2/LineData.json?key=" + API_KEY
                                                     + "&model=StopArea";

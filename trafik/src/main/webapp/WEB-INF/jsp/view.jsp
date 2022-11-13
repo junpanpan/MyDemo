@@ -14,10 +14,10 @@
                 </tr>
             </thead>
             <tbody>
-                <c:forEach items="${busStops}" var="bus">
-                    <tr>
-                       <td>${bus.busLine}</td>
-                       <td>${bus.names}</td>
+                <c:forEach items="${busStops}" var="bus" varStatus="loopStatus" >
+                     <tr class="${loopStatus.index % 2 == 0 ? 'even' : 'odd'}" >
+                       <td><c:out value = "${bus.busLine}"/></td>
+                       <td><c:out value = "${bus.names}" /></td>
                     </tr>
                 </c:forEach>
             </tbody>

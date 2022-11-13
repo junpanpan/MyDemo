@@ -8,6 +8,7 @@ import com.company.logic.Util;
 import com.company.service.BusService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,11 +20,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class BusController {
     private static final Logger LOGGER = LoggerFactory.getLogger(BusController.class);
 
-    private BusService busService = new BusService();
-    private Client client = new Client();
+    @Autowired
+    private BusService busService;
+    @Autowired
+    private Client client;
+
     private String[][] cache;
 
-    @GetMapping("/")
+    @GetMapping({"/", ""})
     @ResponseBody
     public String index() {
         return "Greetings from Spring Boot!";
@@ -53,7 +57,6 @@ public class BusController {
     public String[][] get2() throws ClientException {
         if (cache != null) {
             LOGGER.info("cached");
-
         } else {
 
             Response response1 = client.sendRequestForName();
