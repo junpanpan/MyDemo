@@ -83,21 +83,25 @@ public class UtilTest {
         result = new Result();
         result.lineNumber = "1";
         result.pointNumber = "12";
+        result.directionCode = "1";
         responseData2.resultList.add(result);
 
         result = new Result();
         result.lineNumber = "2";
         result.pointNumber = "13";
+        result.directionCode = "1";
         responseData2.resultList.add(result);
 
         result = new Result();
         result.lineNumber = "2";
         result.pointNumber = "12";
+        result.directionCode = "1";
         responseData2.resultList.add(result);
 
         result = new Result();
         result.lineNumber = "2";
         result.pointNumber = "14";
+        result.directionCode = "1";
         responseData2.resultList.add(result);
 
         return new Response[] {response, response2};

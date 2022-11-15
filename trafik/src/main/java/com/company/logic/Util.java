@@ -59,8 +59,7 @@ public class Util {
         int i = queue.size() - 1 ;
         while (!queue.isEmpty()) {
             Map.Entry<String, Set<String>> entry = queue.poll();
-
-            List<String> temp = entry.getValue().stream().map(x -> names.get(x)).collect(Collectors.toList());
+            Collection<String> temp = entry.getValue().stream().map(x -> names.get(x)).collect(Collectors.toList());
             result[i--] = new String[] {entry.getKey(), temp.stream().collect(Collectors.joining(", "))};
 
             LOGGER.debug("lineNr: " + entry.getKey() + " , size: " + entry.getValue().size());
@@ -87,11 +86,12 @@ public class Util {
             if (result.lineNumber == null || result.pointNumber == null) {
                 throw new ClientException("json mapping error.");
             }
+            if (result.directionCode.equals("1")) {
+                Set<String> value = map.getOrDefault(result.lineNumber, new HashSet<>());
+                value.add(result.pointNumber);
 
-            Set<String> value = map.getOrDefault(result.lineNumber, new HashSet<>());
-            value.add(result.pointNumber);
-
-            map.put(result.lineNumber, value);
+                map.put(result.lineNumber, value);
+            }
         }
 
         return map;

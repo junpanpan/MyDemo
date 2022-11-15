@@ -68,24 +68,4 @@ public class BusController {
         return cache;
     }
 
-    @GetMapping(path = "/te")
-    public String get3(Model model) throws ClientException {
-        if (cache != null) {
-            LOGGER.info("cached");
-
-        } else {
-
-            Response response1 = client.sendRequestForName();
-            Response response2 = client.sendRequestForBus();
-
-            cache = Util.getFirstMaxBusStops(response1, response2, 1);
-
-            for (String[] s : cache) {
-                busService.addBusStop(new BusStop(s[0], s[1]));
-            }
-        }
-
-        model.addAttribute("busStops", busService.getBusStops());
-        return "view";
-    }
 }

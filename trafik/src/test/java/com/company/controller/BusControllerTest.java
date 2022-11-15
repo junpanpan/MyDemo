@@ -66,6 +66,7 @@ public class BusControllerTest extends ControllerTestBase {
         result.stopPointName = "Stockholm";
 
         result.lineNumber = "1";
+        result.directionCode = "1";
         result.pointNumber = result.stopPointNumber;
         responseData.resultList.add(result);
 
@@ -74,6 +75,7 @@ public class BusControllerTest extends ControllerTestBase {
         result2.stopPointName = "Solna";
 
         result2.lineNumber = "1";
+        result2.directionCode = "1";
         result2.pointNumber = result2.stopPointNumber;
         responseData.resultList.add(result2);
 

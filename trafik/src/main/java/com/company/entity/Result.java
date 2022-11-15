@@ -14,6 +14,9 @@ public class Result {
     @JsonProperty("JourneyPatternPointNumber")
     public String pointNumber;
 
+    @JsonProperty("DirectionCode")
+    public String directionCode;
+
     @JsonProperty("StopPointNumber")
     public String stopPointNumber;
 

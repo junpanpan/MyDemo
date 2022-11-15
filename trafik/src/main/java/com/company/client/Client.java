@@ -30,12 +30,20 @@ public class Client {
     public final static String ENDPOINT_STOPAREA_URI = "http://api.sl.se/api2/LineData.json?key=" + API_KEY
                                                     + "&model=StopArea";
 
+    /**
+     * To fetch mapping stopNr -> stopName
+     * @return
+     * @throws ClientException
+     */
     public Response sendRequestForName() throws ClientException {
 
         final HttpPost httpPost = new HttpPost(ENDPOINT_STOPAREA_URI);
         return send(httpPost);
     }
 
+    /**
+     * To fetch mapping all bus lines
+     */
     public Response sendRequestForBus() throws ClientException {
 
         final HttpPost httpPost = new HttpPost(ENDPOINT_BUS_JOUR_URI);
