@@ -13,9 +13,9 @@ public class Util {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Util.class);
 
-    private static final Comparator<Map.Entry<String, Set<String>>> ENTRY_COMPARATOR = new Comparator<>() {
+    private static final Comparator<Map.Entry<String, List<String>>> ENTRY_COMPARATOR = new Comparator<>() {
             @Override
-            public int compare(Map.Entry<String, Set<String>> o1, Map.Entry<String, Set<String>> o2) {
+            public int compare(Map.Entry<String, List<String>> o1, Map.Entry<String, List<String>> o2) {
                 return o1.getValue().size() - o2.getValue().size();
             }};
 
@@ -36,12 +36,12 @@ public class Util {
         }
 
         final Map<String, String> names = getNameMap(response1.responseData.resultList);
-        final Map<String, Set<String>> stops = getStopsMap(response2.responseData.resultList);
+        final Map<String, List<String>> stops = getStopsMap(response2.responseData.resultList);
 
         final int max = limit + 1;
-        PriorityQueue<Map.Entry<String, Set<String>>> queue = new PriorityQueue<>(max, ENTRY_COMPARATOR);
+        PriorityQueue<Map.Entry<String, List<String>>> queue = new PriorityQueue<>(max, ENTRY_COMPARATOR);
 
-        for (Map.Entry<String, Set<String>> entry : stops.entrySet()) {
+        for (Map.Entry<String, List<String>> entry : stops.entrySet()) {
             queue.add(entry);
 
             if (queue.size() == max) {
@@ -53,12 +53,12 @@ public class Util {
         return convertToName(queue, names);
     }
 
-    private static String[][] convertToName(Queue<Map.Entry<String, Set<String>>> queue,
+    private static String[][] convertToName(Queue<Map.Entry<String, List<String>>> queue,
                                             Map<String, String> names) {
         String[][] result = new String[queue.size()][2];
         int i = queue.size() - 1 ;
         while (!queue.isEmpty()) {
-            Map.Entry<String, Set<String>> entry = queue.poll();
+            Map.Entry<String, List<String>> entry = queue.poll();
             Collection<String> temp = entry.getValue().stream().map(x -> names.get(x)).collect(Collectors.toList());
             result[i--] = new String[] {entry.getKey(), temp.stream().collect(Collectors.joining(", "))};
 
@@ -80,14 +80,14 @@ public class Util {
         return map;
     }
 
-    private static Map<String, Set<String>> getStopsMap(List<Result> list) throws ClientException {
-        Map<String, Set<String>> map = new HashMap<>();
+    private static Map<String, List<String>> getStopsMap(List<Result> list) throws ClientException {
+        Map<String, List<String>> map = new HashMap<>();
         for (Result result : list) {
             if (result.lineNumber == null || result.pointNumber == null) {
                 throw new ClientException("json mapping error.");
             }
             if (result.directionCode.equals("1")) {
-                Set<String> value = map.getOrDefault(result.lineNumber, new HashSet<>());
+                List<String> value = map.getOrDefault(result.lineNumber, new ArrayList<>());
                 value.add(result.pointNumber);
 
                 map.put(result.lineNumber, value);

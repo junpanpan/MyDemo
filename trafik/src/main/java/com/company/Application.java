@@ -10,11 +10,6 @@ public class Application  {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Application.class);
 
-//    @Override
-//    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-//        return builder.sources(Application.class);
-//    }
-
     public static void main(String[] args) {
 
         LOGGER.info("Starting application.");
